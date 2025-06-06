@@ -25,10 +25,10 @@ export default function NotFoundPage() {
         {/* Message */}
         <div className="mb-8">
           <h2 className="text-3xl font-semibold text-gray-700 mb-4">
-            Oops! Halaman Tidak Ditemukan
+            Ops! Página Não Encontrada
           </h2>
           <p className="text-lg text-gray-600 max-w-md mx-auto leading-relaxed">
-            Halaman yang Anda cari mungkin telah dipindahkan, dihapus, atau tidak pernah ada.
+            A página que você está procurando pode ter sido movida, removida ou nunca existiu.
           </p>
         </div>
 
@@ -54,7 +54,7 @@ export default function NotFoundPage() {
             className="flex items-center gap-2 px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors duration-200 shadow-md hover:shadow-lg"
           >
             <Home size={20} />
-            Beranda
+            Início
           </button>
         </div>
 

@@ -6,17 +6,43 @@ const CardProject = ({ Img, Title, Description, Link: ProjectLink, id }) => {
   // Handle kasus ketika ProjectLink kosong
   const handleLiveDemo = (e) => {
     if (!ProjectLink) {
-      console.log("ProjectLink kosong");
+      if (import.meta.env.DEV) {
+        console.log("ProjectLink kosong");
+      }
       e.preventDefault();
-      alert("Live demo link is not available");
+      // Show a more elegant notification instead of alert
+      const notification = document.createElement('div');
+      notification.className = 'fixed top-4 right-4 bg-red-500/90 text-white px-4 py-2 rounded-lg shadow-lg z-50 transition-all duration-300';
+      notification.textContent = 'Link de demonstração não está disponível';
+      document.body.appendChild(notification);
+      
+      setTimeout(() => {
+        notification.style.opacity = '0';
+        setTimeout(() => {
+          document.body.removeChild(notification);
+        }, 300);
+      }, 3000);
     }
   };
   
   const handleDetails = (e) => {
     if (!id) {
-      console.log("ID kosong");
+      if (import.meta.env.DEV) {
+        console.log("ID kosong");
+      }
       e.preventDefault();
-      alert("Project details are not available");
+      // Show a more elegant notification instead of alert
+      const notification = document.createElement('div');
+      notification.className = 'fixed top-4 right-4 bg-red-500/90 text-white px-4 py-2 rounded-lg shadow-lg z-50 transition-all duration-300';
+      notification.textContent = 'Detalhes do projeto não estão disponíveis';
+      document.body.appendChild(notification);
+      
+      setTimeout(() => {
+        notification.style.opacity = '0';
+        setTimeout(() => {
+          document.body.removeChild(notification);
+        }, 300);
+      }, 3000);
     }
   };
   
@@ -54,11 +80,11 @@ const CardProject = ({ Img, Title, Description, Link: ProjectLink, id }) => {
                   onClick={handleLiveDemo}
                   className="inline-flex items-center space-x-2 text-blue-400 hover:text-blue-300 transition-colors duration-200"
                 >
-                  <span className="text-sm font-medium">Live Demo</span>
+                  <span className="text-sm font-medium">Demo ao Vivo</span>
                   <ExternalLink className="w-4 h-4" />
                 </a>
               ) : (
-                <span className="text-gray-500 text-sm">Demo Not Available</span>
+                <span className="text-gray-500 text-sm">Demo Não Disponível</span>
               )}
               
      
@@ -69,11 +95,11 @@ const CardProject = ({ Img, Title, Description, Link: ProjectLink, id }) => {
                   onClick={handleDetails}
                   className="inline-flex items-center space-x-2 px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-white/90 transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-purple-500/50"
                 >
-                  <span className="text-sm font-medium">Details</span>
+                  <span className="text-sm font-medium">Detalhes</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               ) : (
-                <span className="text-gray-500 text-sm">Details Not Available</span>
+                <span className="text-gray-500 text-sm">Detalhes Não Disponíveis</span>
               )}
             </div>
           </div>

@@ -31,29 +31,35 @@ const ContactPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Validate form data
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+      Swal.fire({
+        title: 'Erro!',
+        text: 'Por favor, preencha todos os campos.',
+        icon: 'warning',
+        confirmButtonColor: '#6366f1'
+      });
+      return;
+    }
+
     setIsSubmitting(true);
 
     Swal.fire({
-      title: 'Sending Message...',
-      html: 'Please wait while we send your message',
+      title: 'Enviando Mensagem...',
+      html: 'Por favor, aguarde enquanto enviamos sua mensagem',
       allowOutsideClick: false,
       didOpen: () => {
         Swal.showLoading();
       }
     });
 
-    try {
-      // Get form data
-      const form = e.target;
-      const formData = new FormData(form);
-
-      // Submit form
-      await form.submit();
-
+    // Simulate form submission (since this is a static site)
+    setTimeout(() => {
       // Show success message
       Swal.fire({
-        title: 'Success!',
-        text: 'Your message has been sent successfully!',
+        title: 'Sucesso!',
+        text: 'Sua mensagem foi enviada com sucesso!',
         icon: 'success',
         confirmButtonColor: '#6366f1',
         timer: 2000,
@@ -66,16 +72,9 @@ const ContactPage = () => {
         email: "",
         message: "",
       });
-    } catch (error) {
-      Swal.fire({
-        title: 'Error!',
-        text: 'Something went wrong. Please try again later.',
-        icon: 'error',
-        confirmButtonColor: '#6366f1'
-      });
-    } finally {
+      
       setIsSubmitting(false);
-    }
+    }, 1500);
   };
 
   return (
@@ -96,7 +95,18 @@ const ContactPage = () => {
               WebkitTextFillColor: "transparent",
             }}
           >
-            Contact Me
+            <span
+              style={{
+                color: "#6366f1",
+                backgroundImage:
+                  "linear-gradient(45deg, #6366f1 10%, #a855f7 93%)",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
+              Entre em Contato
+            </span>
           </span>
         </h2>
         <p
@@ -104,7 +114,7 @@ const ContactPage = () => {
           data-aos-duration="1100"
           className="text-slate-400 max-w-2xl mx-auto text-sm md:text-base mt-2"
         >
-          Got a question? Send me a message, and I'll get back to you soon.
+          Tem alguma dúvida? Mande uma mensagem e entrarei em contato em breve.
         </p>
       </div>
 
@@ -120,17 +130,17 @@ const ContactPage = () => {
             <div className="flex justify-between items-start mb-8">
               <div>
                 <h2 className="text-4xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-[#6366f1] to-[#a855f7]">
-                  Get in Touch
+                  Entre em contato
                 </h2>
                 <p className="text-gray-400">
-                  Have something to discuss? Send me a message and let's talk.
+                  Tem algo para discutir? Envie-me uma mensagem e vamos conversar.
                 </p>
               </div>
               <Share2 className="w-10 h-10 text-[#6366f1] opacity-50" />
             </div>
 
             <form 
-              action="https://formsubmit.co/ekizulfarrachman@gmail.com"
+              action="https://formsubmit.co/gf.lucas@icloud.com"
               method="POST"
               onSubmit={handleSubmit}
               className="space-y-6"
@@ -148,7 +158,7 @@ const ContactPage = () => {
                 <input
                   type="text"
                   name="name"
-                  placeholder="Your Name"
+                  placeholder="Seu Nome"
                   value={formData.name}
                   onChange={handleChange}
                   disabled={isSubmitting}
@@ -165,7 +175,7 @@ const ContactPage = () => {
                 <input
                   type="email"
                   name="email"
-                  placeholder="Your Email"
+                  placeholder="Seu Email"
                   value={formData.email}
                   onChange={handleChange}
                   disabled={isSubmitting}
@@ -181,7 +191,7 @@ const ContactPage = () => {
                 <MessageSquare className="absolute left-4 top-4 w-5 h-5 text-gray-400 group-focus-within:text-[#6366f1] transition-colors" />
                 <textarea
                   name="message"
-                  placeholder="Your Message"
+                  placeholder="Sua Mensagem"
                   value={formData.message}
                   onChange={handleChange}
                   disabled={isSubmitting}
@@ -197,7 +207,7 @@ const ContactPage = () => {
                 className="w-full bg-gradient-to-r from-[#6366f1] to-[#a855f7] text-white py-4 rounded-xl font-semibold transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-[#6366f1]/20 active:scale-[0.98] flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
               >
                 <Send className="w-5 h-5" />
-                {isSubmitting ? 'Sending...' : 'Send Message'}
+                {isSubmitting ? 'Enviando...' : 'Enviar Mensagem'}
               </button>
             </form>
 

@@ -157,7 +157,10 @@ export default function FullWidthTabs() {
       localStorage.setItem("projects", JSON.stringify(projectData));
       localStorage.setItem("certificates", JSON.stringify(certificateData));
     } catch (error) {
-      console.error("Error fetching data:", error);
+      // Only log errors in development mode
+      if (import.meta.env.DEV) {
+        console.error("Error fetching data:", error);
+      }
     }
   }, []);
 
@@ -192,12 +195,12 @@ export default function FullWidthTabs() {
             backgroundClip: 'text',
             WebkitTextFillColor: 'transparent'
           }}>
-            Portfolio Showcase
+            Showcase do Portfólio
           </span>
         </h2>
         <p className="text-slate-400 max-w-2xl mx-auto text-sm md:text-base mt-2">
-          Explore my journey through projects, certifications, and technical expertise. 
-          Each section represents a milestone in my continuous learning path.
+          Explore minha jornada através de projetos, certificações e expertise técnica.
+          Cada seção representa um marco no meu caminho contínuo de aprendizado.
         </p>
       </div>
 
@@ -273,12 +276,12 @@ export default function FullWidthTabs() {
           >
             <Tab
               icon={<Code className="mb-2 w-5 h-5 transition-all duration-300" />}
-              label="Projects"
+              label="Projetos"
               {...a11yProps(0)}
             />
             <Tab
               icon={<Award className="mb-2 w-5 h-5 transition-all duration-300" />}
-              label="Certificates"
+              label="Certificados"
               {...a11yProps(1)}
             />
             <Tab
@@ -295,57 +298,117 @@ export default function FullWidthTabs() {
           onChangeIndex={setValue}
         >
           <TabPanel value={value} index={0} dir={theme.direction}>
-            <div className="container mx-auto flex justify-center items-center overflow-hidden">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-5">
-                {displayedProjects.map((project, index) => (
-                  <div
-                    key={project.id || index}
-                    data-aos={index % 3 === 0 ? "fade-up-right" : index % 3 === 1 ? "fade-up" : "fade-up-left"}
-                    data-aos-duration={index % 3 === 0 ? "1000" : index % 3 === 1 ? "1200" : "1000"}
-                  >
-                    <CardProject
-                      Img={project.Img}
-                      Title={project.Title}
-                      Description={project.Description}
-                      Link={project.Link}
-                      id={project.id}
-                    />
+            <div className="container mx-auto flex justify-center items-center overflow-hidden min-h-[300px]">
+              <div 
+                className="
+                  flex flex-col items-center justify-center
+                  bg-gradient-to-br from-white/5 to-white/10
+                  backdrop-blur-sm
+                  border border-white/10
+                  rounded-2xl
+                  p-12 md:p-16
+                  shadow-2xl
+                  hover:shadow-purple-500/10
+                  transition-all duration-500
+                  group
+                  relative
+                  overflow-hidden
+                "
+                data-aos="fade-up"
+                data-aos-duration="1000"
+              >
+                {/* Background gradient effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-indigo-600/10 to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
+                
+                {/* Icon */}
+                <div className="relative mb-6">
+                  <div className="absolute -inset-4 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full blur opacity-30 group-hover:opacity-75 transition duration-500" />
+                  <div className="relative p-4 bg-black/50 backdrop-blur-sm rounded-full border border-white/10">
+                    <Code className="w-12 h-12 text-indigo-400 group-hover:text-white transition-colors duration-300" />
                   </div>
-                ))}
+                </div>
+                
+                {/* Text */}
+                <h3 className="
+                  text-4xl md:text-5xl font-bold
+                  bg-gradient-to-r from-indigo-400 via-purple-400 to-indigo-400
+                  bg-clip-text text-transparent
+                  mb-4
+                  group-hover:scale-105
+                  transition-transform duration-300
+                ">
+                  EM BREVE
+                </h3>
+                
+                <p className="text-gray-400 text-center text-lg max-w-md leading-relaxed">
+                  Novos projetos incríveis estão sendo desenvolvidos e serão adicionados em breve!
+                </p>
+                
+                {/* Animated dots */}
+                <div className="flex space-x-2 mt-6">
+                  <div className="w-2 h-2 bg-indigo-400 rounded-full animate-pulse" style={{animationDelay: '0s'}} />
+                  <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" style={{animationDelay: '0.2s'}} />
+                  <div className="w-2 h-2 bg-indigo-400 rounded-full animate-pulse" style={{animationDelay: '0.4s'}} />
+                </div>
               </div>
             </div>
-            {projects.length > initialItems && (
-              <div className="mt-6 w-full flex justify-start">
-                <ToggleButton
-                  onClick={() => toggleShowMore('projects')}
-                  isShowingMore={showAllProjects}
-                />
-              </div>
-            )}
           </TabPanel>
 
           <TabPanel value={value} index={1} dir={theme.direction}>
-            <div className="container mx-auto flex justify-center items-center overflow-hidden">
-              <div className="grid grid-cols-1 md:grid-cols-3 md:gap-5 gap-4">
-                {displayedCertificates.map((certificate, index) => (
-                  <div
-                    key={index}
-                    data-aos={index % 3 === 0 ? "fade-up-right" : index % 3 === 1 ? "fade-up" : "fade-up-left"}
-                    data-aos-duration={index % 3 === 0 ? "1000" : index % 3 === 1 ? "1200" : "1000"}
-                  >
-                    <Certificate ImgSertif={certificate.Img} />
+            <div className="container mx-auto flex justify-center items-center overflow-hidden min-h-[300px]">
+              <div 
+                className="
+                  flex flex-col items-center justify-center
+                  bg-gradient-to-br from-white/5 to-white/10
+                  backdrop-blur-sm
+                  border border-white/10
+                  rounded-2xl
+                  p-12 md:p-16
+                  shadow-2xl
+                  hover:shadow-purple-500/10
+                  transition-all duration-500
+                  group
+                  relative
+                  overflow-hidden
+                "
+                data-aos="fade-up"
+                data-aos-duration="1000"
+              >
+                {/* Background gradient effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-indigo-600/10 to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
+                
+                {/* Icon */}
+                <div className="relative mb-6">
+                  <div className="absolute -inset-4 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full blur opacity-30 group-hover:opacity-75 transition duration-500" />
+                  <div className="relative p-4 bg-black/50 backdrop-blur-sm rounded-full border border-white/10">
+                    <Award className="w-12 h-12 text-indigo-400 group-hover:text-white transition-colors duration-300" />
                   </div>
-                ))}
+                </div>
+                
+                {/* Text */}
+                <h3 className="
+                  text-4xl md:text-5xl font-bold
+                  bg-gradient-to-r from-indigo-400 via-purple-400 to-indigo-400
+                  bg-clip-text text-transparent
+                  mb-4
+                  group-hover:scale-105
+                  transition-transform duration-300
+                ">
+                  EM BREVE
+                </h3>
+                
+                <p className="text-gray-400 text-center text-lg max-w-md leading-relaxed">
+                  Certificados e conquistas profissionais serão adicionados em breve!
+                </p>
+                
+                {/* Animated dots */}
+                <div className="flex space-x-2 mt-6">
+                  <div className="w-2 h-2 bg-indigo-400 rounded-full animate-pulse" style={{animationDelay: '0s'}} />
+                  <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" style={{animationDelay: '0.2s'}} />
+                  <div className="w-2 h-2 bg-indigo-400 rounded-full animate-pulse" style={{animationDelay: '0.4s'}} />
+                </div>
               </div>
             </div>
-            {certificates.length > initialItems && (
-              <div className="mt-6 w-full flex justify-start">
-                <ToggleButton
-                  onClick={() => toggleShowMore('certificates')}
-                  isShowingMore={showAllCertificates}
-                />
-              </div>
-            )}
           </TabPanel>
 
           <TabPanel value={value} index={2} dir={theme.direction}>
